@@ -102,8 +102,8 @@ export function ReviewDialog({ open, onOpenChange, position }: Props) {
                           {`BTC falls ${Math.round(position.liquidationDropPct * 100)}%`}
                         </p>
                         <p className="mt-0.5 text-sm text-ink-500">
-                          Your position may be automatically sold to repay the
-                          loan.
+                          Kraken may automatically sell your position to repay
+                          the loan.
                         </p>
                       </div>
                     </div>

@@ -43,11 +43,11 @@ function CostOfBorrowing({ position }: { position: Position }) {
   return (
     <SectionCard icon={<Clock className="h-5 w-5" />} title="The cost of borrowing">
       <p className="text-base text-ink-500">
-        You're borrowing{" "}
+        Borrowing{" "}
         <span className="font-semibold text-ink-900">
           {usd0(position.borrowed)}
-        </span>
-        . Approximate cost:
+        </span>{" "}
+        costs approximately:
       </p>
       <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="rounded-2xl bg-white/[0.04] p-4 text-center">
@@ -76,7 +76,7 @@ function IfBitcoinFalls({ position }: { position: Position }) {
   return (
     <SectionCard
       icon={<TrendingDown className="h-5 w-5" />}
-      title="What happens if Bitcoin falls?"
+      title="If Bitcoin falls"
     >
       <div className="space-y-2.5">
         {outcomes.map((o, i) => {
@@ -116,14 +116,10 @@ function IfBitcoinFalls({ position }: { position: Position }) {
                   }`}
                 >
                   {o.liquidation ? (
-                    "Your position may be automatically sold to repay the loan"
+                    "Kraken may automatically sell your position to repay the loan"
                   ) : (
                     <>
-                      Your position value drops from{" "}
-                      <span className="font-semibold text-ink-900">
-                        {usd0(position.positionUsd)}
-                      </span>{" "}
-                      to about{" "}
+                      Position value falls to approximately{" "}
                       <span className="font-semibold text-ink-900">
                         {usd0(valueAfter)}
                       </span>
@@ -174,7 +170,7 @@ function CashVsCredit({ position }: { position: Position }) {
   const liqPct = Math.round(position.liquidationDropPct * 100);
 
   return (
-    <SectionCard icon={<Scale className="h-5 w-5" />} title="Why use credit?">
+    <SectionCard icon={<Scale className="h-5 w-5" />} title="Cash vs Credit">
       <div className="grid grid-cols-2 gap-3">
         {/* Cash only */}
         <div className="rounded-2xl bg-white/[0.04] p-4">
@@ -224,8 +220,8 @@ function CashVsCredit({ position }: { position: Position }) {
         </div>
       </div>
       <p className="mt-4 text-sm text-ink-400">
-        Credit lets you buy more Bitcoin than your cash alone — in exchange for
-        interest and the risk of being sold out if the price falls far enough.
+        Using credit lets you buy more Bitcoin today, but introduces borrowing
+        costs and liquidation risk.
       </p>
     </SectionCard>
   );

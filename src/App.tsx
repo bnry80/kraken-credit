@@ -44,8 +44,8 @@ export default function App() {
             Cash or credit?
           </h1>
           <p className="mt-2 text-base leading-relaxed text-ink-400">
-            Decide how to pay for your Bitcoin — use your own cash, or borrow
-            from your credit line to buy more.
+            Use your cash, borrow from your credit line, or combine both to buy
+            Bitcoin.
           </p>
         </motion.div>
 

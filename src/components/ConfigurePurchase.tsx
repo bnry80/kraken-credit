@@ -232,8 +232,8 @@ function OutcomeCard({ position }: { position: Position }) {
               {context}
             </p>
             <p className="tabular mt-1 text-sm text-white/70">
-              {usd0(position.creditDrawn)} borrowed of your{" "}
-              {usd0(position.positionUsd)} purchase
+              {usd0(position.creditDrawn)} of this purchase is funded with
+              credit.
             </p>
           </div>
         </motion.div>
