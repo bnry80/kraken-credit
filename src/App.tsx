@@ -38,7 +38,7 @@ export default function App() {
     <div className="min-h-screen">
       <Nav />
 
-      <main className="px-2.5 pb-40 pt-8 sm:px-10 sm:pt-12">
+      <main className="mx-auto max-w-[1200px] px-2.5 pb-40 pt-8 sm:px-10 sm:pt-12">
         <motion.div {...fade} className="mb-7 px-1">
           <h1 className="font-display text-[30px] font-black leading-tight tracking-tight text-ink-900 sm:text-[38px]">
             Cash or credit?
@@ -79,7 +79,7 @@ export default function App() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-x-0 bottom-0 z-30 bg-bg/80 shadow-[0_-12px_40px_-12px_rgba(0,0,0,0.85)] backdrop-blur-xl"
           >
-            <div className="flex items-center justify-between gap-3 px-5 py-4 sm:gap-4">
+            <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-2.5 py-4 sm:gap-4 sm:px-10">
               <div className="min-w-0 flex-1">
                 <p className="text-sm text-ink-400">You're buying</p>
                 <p className="tabular truncate text-lg font-semibold text-ink-900">
