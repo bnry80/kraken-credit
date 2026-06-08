@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 import { ArrowRight } from "lucide-react";
 import { Nav } from "./components/Nav";
 import { ConfigurePurchase } from "./components/ConfigurePurchase";
@@ -112,6 +113,8 @@ export default function App() {
         onOpenChange={setReviewOpen}
         position={position}
       />
+
+      <Analytics />
     </div>
   );
 }
