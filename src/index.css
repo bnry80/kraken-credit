@@ -2,59 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Kraken brand fonts (sourced from kraken.com) */
+/* ABC Diatype Semi Mono — Figma amount typography */
 @font-face {
-  font-family: "Kraken-Product";
+  font-family: "ABC Diatype Semi Mono";
+  font-display: swap;
+  font-weight: 100 900;
+  font-style: normal;
+  src: url("/fonts/ABCDiatypeSemi-MonoVariable-Trial.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ABC Diatype Semi Mono";
   font-display: swap;
   font-weight: 400;
   font-style: normal;
-  src: url("/fonts/Kraken-Product-Regular.woff2") format("woff2");
+  src: url("/fonts/ABCDiatypeSemi-Mono-Regular.otf") format("opentype");
 }
+
 @font-face {
-  font-family: "Kraken-Product";
+  font-family: "ABC Diatype Semi Mono";
   font-display: swap;
   font-weight: 500;
   font-style: normal;
-  src: url("/fonts/Kraken-Product-Medium.woff2") format("woff2");
+  src: url("/fonts/ABCDiatypeSemi-Mono-Medium.otf") format("opentype");
 }
+
 @font-face {
-  font-family: "Kraken-Product";
-  font-display: swap;
-  font-weight: 600;
-  font-style: normal;
-  src: url("/fonts/Kraken-Product-SemiBold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Kraken-Product";
+  font-family: "ABC Diatype Semi Mono";
   font-display: swap;
   font-weight: 700;
   font-style: normal;
-  src: url("/fonts/Kraken-Product-Bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Kraken-Brand";
-  font-display: swap;
-  font-weight: 700;
-  font-style: normal;
-  src: url("/fonts/Kraken-Brand-Bold.otf") format("opentype");
-}
-@font-face {
-  font-family: "Kraken-Brand";
-  font-display: swap;
-  font-weight: 900;
-  font-style: normal;
-  src: url("/fonts/Kraken-Brand-Black.otf") format("opentype");
-}
-@font-face {
-  font-family: "Kraken-Brand";
-  font-display: swap;
-  font-weight: 950;
-  font-style: normal;
-  src: url("/fonts/Kraken-Brand-ExtraBlack.otf") format("opentype");
+  src: url("/fonts/ABCDiatypeSemi-Mono-Bold-Trial.otf") format("opentype");
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -65,22 +47,30 @@ body,
 
 body {
   margin: 0;
-  background:
-    radial-gradient(1100px 620px at 100% -12%, rgba(113, 50, 245, 0.22), transparent 58%),
-    radial-gradient(820px 520px at -8% 4%, rgba(16, 185, 129, 0.06), transparent 55%),
-    #0c0d10;
-  background-attachment: fixed;
-  color: #f6f7f9;
-  font-family: "Kraken-Product", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #e5e5ea;
+  color: #000000;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.font-diatype {
+  font-family: "ABC Diatype Semi Mono", Inter, sans-serif;
+  font-variation-settings: "wdth" 100, "MONO" 0;
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom range track styling fallback */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

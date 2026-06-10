@@ -25,5 +25,11 @@ export const pct = (n: number, digits = 1) =>
 export const btc = (n: number) =>
   `${n.toLocaleString("en-US", { maximumFractionDigits: 6 })} BTC`;
 
+export const btcQty = (n: number) =>
+  n.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 3,
+  });
+
 export const clamp = (n: number, min: number, max: number) =>
   Math.min(Math.max(n, min), max);
