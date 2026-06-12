@@ -52,7 +52,7 @@ export function ReviewScreen({ position, onConfirm, onBack }: Props) {
         variants={item}
         className="absolute inset-x-0 bottom-2 z-10 px-2"
       >
-        <div className="flex flex-col gap-[30px] rounded-[54px] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
+        <div className="flex flex-col gap-[30px] overflow-clip rounded-[54px] border border-[#7a2eff] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
           <div className="flex flex-col gap-[10px]">
             <ReceiptCard position={position} />
 

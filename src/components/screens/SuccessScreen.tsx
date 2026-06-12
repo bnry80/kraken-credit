@@ -31,12 +31,25 @@ export function SuccessScreen({ position, onDone }: Props) {
       {/* Hero: coins + check + headline, vertically centered in the space
           above the card so it stays centered at any screen height. */}
       <div className="relative flex w-full min-w-0 flex-1 flex-col items-center justify-center overflow-hidden pt-[max(8px,env(safe-area-inset-top))]">
-        {/* Faint lavender orb behind the headline */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[466px] w-[328px] -translate-x-1/2 -translate-y-1/2">
+        {/* Faint lavender orb — Figma node 147:1491 anchors this at the
+            "Position created" headline (top: 290px from the phone frame top
+            on the 402×874 design). We place it relative to the headline
+            block below instead of the hero center so it stays glued to the
+            text at any screen height. A slow rotate + scale breath animates
+            the gradient subtly. */}
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[58%] z-0 h-[466px] w-[328px] -translate-x-1/2 -translate-y-1/2"
+          initial={reduce ? false : { scale: 0.96, rotate: 0 }}
+          animate={
+            reduce ? undefined : { scale: [0.96, 1.04, 0.96], rotate: [0, 8, 0] }
+          }
+          transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }}
+        >
           <div className="absolute" style={{ inset: "-25.75% -36.59%" }}>
             <img src="/orb.svg" alt="" className="block h-full w-full" />
           </div>
-        </div>
+        </motion.div>
 
         <FloatingCoins className="relative z-0 shrink-0" />
 
@@ -80,7 +93,7 @@ export function SuccessScreen({ position, onDone }: Props) {
 
       {/* Detail card — anchored to the bottom */}
       <motion.div variants={item} className="relative z-10 mx-2 mb-2">
-          <div className="flex flex-col gap-[30px] rounded-[54px] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
+          <div className="flex flex-col gap-[30px] overflow-clip rounded-[54px] border border-[#7a2eff] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
           <div className="flex w-full flex-col items-start gap-[16px] rounded-[16px] border border-[#f9f9f9] bg-white p-[16px]">
             <p className="text-[16px] font-medium tracking-[-0.04em] text-black">
               {usd0(position.positionUsd)} position funded with:
