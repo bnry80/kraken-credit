@@ -55,6 +55,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Match Figma's line-height (CSS `normal`) instead of Tailwind's base 1.5. */
+  line-height: normal;
+}
+
+/* ---- Native iOS feel ---------------------------------------------------- */
+
+/* No blue flash on tap, no long-press callout, no accidental text selection —
+   the things that immediately read as "this is a web page". */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+button,
+[role="button"] {
+  touch-action: manipulation; /* removes the 300ms tap delay */
+}
+
+html,
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Momentum + rubber-band scrolling inside scroll regions, iOS style. */
+.ios-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 .font-diatype {
@@ -64,6 +102,16 @@ body {
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Matches Figma's `text-box-trim: trim-both; text-box-edge: cap alphabetic;`.
+   Trims the line box to cap-height (top) and the alphabetic baseline (bottom)
+   so flex gaps land exactly as designed instead of being inflated by
+   line-height padding (critical for the big amount type). */
+.text-trim {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-box: trim-both cap alphabetic;
 }
 
 .no-scrollbar::-webkit-scrollbar {

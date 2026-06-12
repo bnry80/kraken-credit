@@ -35,7 +35,7 @@ export function FlowShell({ children, onBack, footer }: Props) {
       <div className="relative flex-1 overflow-hidden">{children}</div>
 
       {footer && (
-        <div className="flex shrink-0 flex-col items-end px-6 pb-[max(20px,env(safe-area-inset-bottom))] pt-4">
+        <div className="flex w-full shrink-0 flex-col px-6 pb-[max(20px,env(safe-area-inset-bottom))] pt-4">
           {footer}
         </div>
       )}

@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { LayoutGrid, ShieldCheck, TrendingUp } from "lucide-react";
+import type { ReactNode } from "react";
 import type { Position } from "../../lib/margin";
-import { btcQty, usd, usd0 } from "../../lib/utils";
-import { stagger } from "../../lib/motion";
-import { FlowShell } from "../mobile/FlowShell";
-import { ContinueButton } from "../ui/ContinueButton";
-import { DetailRow } from "../ui/DetailRow";
+import { fadeItem, riseItem, sceneStagger } from "../../lib/motion";
+import { FloatingCoins } from "../ui/FloatingCoins";
+import { Pressable } from "../ui/Pressable";
+import { ReceiptCard } from "../ui/ReceiptCard";
 
 interface Props {
   position: Position;
@@ -12,79 +13,103 @@ interface Props {
   onBack: () => void;
 }
 
+const PURCHASE_GRADIENT = "linear-gradient(270deg, #7a2eff 0%, #a36eff 100%)";
+
 export function ReviewScreen({ position, onConfirm, onBack }: Props) {
-  const borrowing = position.creditDrawn > 0;
   const liqPct = Math.round(position.liquidationDropPct * 100);
+  const reduce = useReducedMotion();
+  const item = reduce ? fadeItem : riseItem;
 
   return (
-    <FlowShell
-      onBack={onBack}
-      footer={
-        <ContinueButton onClick={onConfirm}>
-          {borrowing ? "Buy with Credit" : "Buy with Cash"}
-        </ContinueButton>
-      }
+    <motion.div
+      variants={sceneStagger}
+      initial="hidden"
+      animate="show"
+      className="relative h-full overflow-hidden bg-white"
     >
-      <div className="no-scrollbar h-full overflow-y-auto px-5 pb-6">
-        <motion.p
-          {...stagger(0)}
-          className="text-[13px] font-medium text-[#545454]"
-        >
-          Review purchase
-        </motion.p>
-        <motion.div {...stagger(1)} className="mt-2">
-          <p className="font-diatype tabular text-[36px] font-bold leading-none tracking-tight text-black">
-            {btcQty(position.quantity)} BTC
+      <FloatingCoins className="absolute left-[-16px] top-[201px] z-0" />
+
+      {/* Header (top-84) */}
+      <motion.div
+        variants={item}
+        className="absolute left-[28px] top-[84px] z-10 flex w-[265px] flex-col gap-[20px]"
+      >
+        <p className="text-[18px] font-medium tracking-[-0.04em] text-black">
+          Buy Bitcoin
+        </p>
+        <div className="flex flex-col gap-[10px]">
+          <p className="text-[20px] font-medium tracking-[-0.04em] text-black">
+            Review purchase
           </p>
-          <p className="tabular mt-2 text-[16px] text-[#545454]">
-            ≈ {usd0(position.positionUsd)}
+          <p className="text-[16px] font-medium tracking-[-0.04em] text-[#7f7f7f]">
+            Review the details of your purchase before you confirm.
           </p>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        <motion.div {...stagger(2)} className="mt-8 border-t border-black/[0.06]">
-          <DetailRow label="Cash" value={usd0(position.cashCommitted)} />
-          {borrowing && (
-            <DetailRow label="Borrowed" value={usd0(position.creditDrawn)} />
-          )}
-        </motion.div>
+      {/* Detail card — anchored to the bottom */}
+      <motion.div
+        variants={item}
+        className="absolute inset-x-0 bottom-2 z-10 px-2"
+      >
+        <div className="flex flex-col gap-[30px] rounded-[54px] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
+          <div className="flex flex-col gap-[10px]">
+            <ReceiptCard position={position} />
 
-        {borrowing && (
-          <>
-            <motion.div {...stagger(3)} className="mt-6 border-t border-black/[0.06]">
-              <p className="pt-4 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#545454]">
-                Borrowing cost
-              </p>
-              <DetailRow
-                label="Daily"
-                value={`${usd(position.dailyInterest)}/day`}
-              />
-              <DetailRow
-                label="Monthly"
-                value={`${usd(position.monthlyInterest)}/month`}
-              />
-            </motion.div>
+            {/* Info panel */}
+            <div className="flex w-full flex-col gap-[10px] rounded-[16px] border border-[#f9f9f9] bg-[#f6f5fe] px-[28px] py-[16px]">
+              <InfoRow icon={<LayoutGrid className="h-[19px] w-[19px]" strokeWidth={2} />}>
+                Interest accrues daily
+              </InfoRow>
+              <InfoRow icon={<TrendingUp className="h-[19px] w-[19px]" strokeWidth={2} />}>
+                Borrowing amplifies gains and losses
+              </InfoRow>
+              <InfoRow icon={<ShieldCheck className="h-[19px] w-[19px]" strokeWidth={2} />}>
+                If Bitcoin falls approximately {liqPct}%, your position may be
+                liquidated.
+              </InfoRow>
+            </div>
+          </div>
 
-            <motion.div {...stagger(4)} className="mt-6 border-t border-black/[0.06]">
-              <p className="pt-4 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#545454]">
-                Risk reminder
-              </p>
-              <p className="mt-3 text-[15px] leading-relaxed text-black">
-                If Bitcoin falls approximately {liqPct}%, Kraken may sell your
-                position to repay the loan.
-              </p>
-            </motion.div>
-
-            <motion.ul
-              {...stagger(5)}
-              className="mt-6 space-y-2.5 text-[15px] leading-relaxed text-[#545454]"
+          {/* Back / Purchase */}
+          <div className="flex items-center justify-between">
+            <Pressable
+              onClick={onBack}
+              haptic="light"
+              scale={0.94}
+              dim={false}
+              className="text-[16px] font-medium tracking-[-0.04em] text-[#7f7f7f]"
             >
-              <li>Interest accrues while funds remain borrowed.</li>
-              <li>Borrowing increases both gains and losses.</li>
-              <li>You can repay borrowed funds at any time.</li>
-            </motion.ul>
-          </>
-        )}
-      </div>
-    </FlowShell>
+              Back
+            </Pressable>
+            <Pressable
+              onClick={onConfirm}
+              haptic="medium"
+              scale={0.96}
+              className="group flex items-center gap-[10px] rounded-[40px] px-[28px] py-[24px] text-[16px] font-medium tracking-[-0.04em] text-white shadow-[0_10px_24px_rgba(122,46,255,0.32)]"
+              style={{ backgroundImage: PURCHASE_GRADIENT }}
+            >
+              Purchase position
+              <span className="text-[15px] transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </Pressable>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function InfoRow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-[16px]">
+      <span className="flex h-[21px] w-[19px] shrink-0 items-center justify-center text-[#7a2eff]">
+        {icon}
+      </span>
+      <p className="flex-1 text-[13px] font-medium tracking-[-0.04em] text-black">
+        {children}
+      </p>
+    </div>
   );
 }
