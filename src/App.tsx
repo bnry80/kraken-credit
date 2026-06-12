@@ -13,7 +13,7 @@ type Step = "build" | "review" | "success";
 export default function App() {
   const [amount, setAmountState] = useState(3000);
   const [credit, setCreditState] = useState(1500);
-  const [stack, setStack] = useState<Step[]>(["build", "review", "success"]);
+  const [stack, setStack] = useState<Step[]>(["build"]);
 
   const drawn = clampCredit(amount, credit);
   const position = buildPosition({
