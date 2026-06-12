@@ -28,20 +28,23 @@ export function SuccessScreen({ position, onDone }: Props) {
       animate="show"
       className="relative flex h-full flex-col overflow-hidden bg-white"
     >
+      {/* Faint lavender orb — Figma node 147:1491.
+          Spec: left: 50%, top: 290px, w: 328, h: 466 on the 402×874 frame.
+          We position relative to the SCREEN ROOT (not the hero column) so
+          the orb's vertical anchor matches Figma regardless of how the flex
+          children below it lay out. Sits behind everything (z-0). */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[290px] z-0 h-[466px] w-[328px] -translate-x-1/2"
+      >
+        <div className="absolute" style={{ inset: "-25.75% -36.59%" }}>
+          <img src="/orb.svg" alt="" className="block h-full w-full" />
+        </div>
+      </div>
+
       {/* Hero: coins + check + headline, vertically centered in the space
           above the card so it stays centered at any screen height. */}
       <div className="relative flex w-full min-w-0 flex-1 flex-col items-center justify-center overflow-hidden pt-[max(8px,env(safe-area-inset-top))]">
-        {/* Faint lavender orb — Figma node 147:1491. Static, positioned to
-            sit behind the "Position created" headline area. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[58%] z-0 h-[466px] w-[328px] -translate-x-1/2 -translate-y-1/2"
-        >
-          <div className="absolute" style={{ inset: "-25.75% -36.59%" }}>
-            <img src="/orb.svg" alt="" className="block h-full w-full" />
-          </div>
-        </div>
-
         <FloatingCoins className="relative z-0 shrink-0" />
 
         {/* Glassy check hero, overlapping the coins */}
