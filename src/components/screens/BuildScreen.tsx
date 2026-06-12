@@ -56,8 +56,12 @@ export function BuildScreen({
         animate="show"
         className="relative z-10 flex h-full flex-col"
       >
-        {/* Header */}
-        <div className="flex flex-col gap-[30px] px-[28px] pt-[84px]">
+        {/* Header. Top padding accounts for the device's status bar (real
+            mobile) and the desktop preview's Dynamic Island clearance via
+            sm: breakpoint. Without sm:pt-[84px] we'd jam under the island
+            in the desktop frame; without the mobile value we'd waste 60px
+            on real phones where the OS owns that space. */}
+        <div className="flex flex-col gap-[30px] px-[28px] pt-[max(20px,env(safe-area-inset-top))] sm:pt-[84px]">
           <motion.div variants={item} className="flex flex-col gap-[20px]">
             <p className="text-[18px] font-medium tracking-[-0.04em] text-black">
               Buy Bitcoin

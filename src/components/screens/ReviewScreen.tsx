@@ -29,10 +29,11 @@ export function ReviewScreen({ position, onConfirm, onBack }: Props) {
     >
       <FloatingCoins className="absolute left-[-16px] top-[201px] z-0" />
 
-      {/* Header (top-84) */}
+      {/* Header. Top inset accounts for the device status bar on mobile and
+          the desktop preview's Dynamic Island clearance via sm:. */}
       <motion.div
         variants={item}
-        className="absolute left-[28px] top-[84px] z-10 flex w-[265px] flex-col gap-[20px]"
+        className="absolute left-[28px] top-[max(20px,env(safe-area-inset-top))] z-10 flex w-[265px] flex-col gap-[20px] sm:top-[84px]"
       >
         <p className="text-[18px] font-medium tracking-[-0.04em] text-black">
           Buy Bitcoin
