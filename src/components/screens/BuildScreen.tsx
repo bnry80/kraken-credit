@@ -91,7 +91,7 @@ export function BuildScreen({
         {/* Funding mix card */}
         <motion.div
           variants={item}
-          className="mx-2 mb-2 flex flex-col gap-[30px] overflow-clip rounded-[54px] border border-[#7a2eff] bg-[#f4f4f7] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]"
+          className="mx-2 mb-[max(8px,env(safe-area-inset-bottom))] flex flex-col gap-[30px] overflow-clip rounded-[54px] bg-[#f4f4f7] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]"
         >
           <div className="flex flex-col gap-[24px]">
             <div className="flex flex-col gap-[8px] px-[24px]">

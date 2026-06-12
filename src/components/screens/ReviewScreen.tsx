@@ -47,12 +47,13 @@ export function ReviewScreen({ position, onConfirm, onBack }: Props) {
         </div>
       </motion.div>
 
-      {/* Detail card — anchored to the bottom */}
+      {/* Detail card — anchored to the bottom, with safe-area inset so the
+          card doesn't get hidden behind iOS Safari's bottom UI. */}
       <motion.div
         variants={item}
-        className="absolute inset-x-0 bottom-2 z-10 px-2"
+        className="absolute inset-x-0 bottom-[max(8px,env(safe-area-inset-bottom))] z-10 px-2"
       >
-        <div className="flex flex-col gap-[30px] overflow-clip rounded-[54px] border border-[#7a2eff] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
+        <div className="flex flex-col gap-[30px] overflow-clip rounded-[54px] bg-[#f4f4f7] px-[24px] pb-[24px] pt-[30px] shadow-[0_23px_32.2px_rgba(0,0,0,0.16)]">
           <div className="flex flex-col gap-[10px]">
             <ReceiptCard position={position} />
 
